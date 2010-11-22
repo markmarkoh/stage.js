@@ -1,0 +1,190 @@
+
+<!-- saved from url=(0042)http://info.press9formoreoptions.com/intro -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Introduction to A/B Testing with Press9 </title>
+        <script type="text/javascript" src="./intro_files/jquery.js"></script>
+        <script type="text/javascript" src="./stage.js"></script>
+        <link href="./intro_files/stage.css" rel="stylesheet" type="text/css">
+            
+    </head>
+    <body>
+        <div id="header"></div>
+        <div style="position: absolute; top:0px; right: 0px;"><a href="http://press9formoreoptions.com/" style="margin: 0pt; padding: 0pt;"><img src="./intro_files/logo.png" style="border: 0px none ;"></a></div>
+        <style type="text/css">
+            #header {
+                background-color:#000000;
+                height:22px;
+                width:100%;
+            }
+        </style>
+        <script type="text/javascript">
+            function log(msg) {
+                try {
+                    console.log(msg);
+                } catch(e) {;}
+            }
+        $(document).ready(function() {
+        
+            var w_height = $(window).height();
+            var w_width = window.innerWidth;
+
+$.fn.horizontalCenter = function(anchorSide, offset) {
+offset = offset || 0;
+var w_width = window.innerWidth;
+return $(this).css(anchorSide, ( (w_width / 2) - ( $(this).width() / 2 ) + offset ) + 'px');
+};
+            //$.fn.horizontalCenter = $.stage.horizonalCenter;
+            $("#page_1").horizontalCenter('left');
+            $("#page_2").horizontalCenter('right');
+            $("#random_users").horizontalCenter('left', w_width/4);
+            $("#goal_users").horizontalCenter('right');
+            $("#stats_users").horizontalCenter('right');
+
+            $("#visitor_box").horizontalCenter('right');
+
+            //stage ( id, map, duration, wait) 
+            var stages = [ 
+                $.stage.create({
+                      map: {'#page_1' : { left : (w_width / 2  - (325 + 15 ) ) + 'px', top: '20px', height: '450px', width: '325px' },
+                    '#page_2' : { right :(w_width / 2  - (325 + 15 ) ) + 'px', top: '20px', height: '450px', width: '325px' },
+                    '#top_center' : { height: 'hide' } }
+                    , speed:1000, wait:750 }
+                ),
+              $.stage.create({ wait:3000, callback:function(d) { 
+                        if(!d) d = 'slow';
+                        $("#page_1").html('<img src="genericpage_blue.png" />'); 
+                        $("#page_2").html('<img src="genericpage_green.png" />'); 
+                        $("#slight").horizontalCenter('left').fadeIn(d);
+                        } }
+               ),
+
+                $.stage.create({ 
+                    map: {'#page_1' : { left: '100px', top: '235px', height: '250px', width: '175px' },
+                    '#page_2' : { right: '100px', top: '235px', height: '250px', width: '175px' },
+                    '#slight' : { height: 'hide' }
+                    }, speed:1000, wait:4500, callback:function(d) {if(!d) d = 'slow';
+$(".pointer").fadeIn(d);$("#random_users").fadeIn(d);$(".visitor").fadeIn(d);}
+                }
+                ),
+                $.stage.create( {
+                    map: {'#visitor_1' : { top: '100px', right:'180px' },
+                    '#visitor_3' : { top: '100px', right:'105px' },
+                    '#visitor_5' : { top: '5px', right:'140px' },
+                    '#visitor_2' : { top: '100px', right: (w_width ) - 260 + 'px' },
+                    '#visitor_4' : { top: '100px', right: (w_width) - 185 + 'px' },
+                    '#visitor_6' : { top: '5px', right: (w_width ) - 220 + 'px' }
+                    }, speed:600, wait:3000, callback:function(d) {}
+                    }
+                ),        
+                $.stage.create({map:null, speed:0, wait:600, callback:function(d) {if(!d) d = 'slow';
+ $("#page_1").fadeOut(d); $("#page_2").fadeOut(d);$("#visitor_1").fadeOut(d);$("#visitor_4").fadeOut(d);$("#visitor_6").fadeOut(d);$(".pointer").fadeOut(d);$("#random_users").fadeOut(d, function() {$("#goal_users").fadeIn(d);}); }
+ }),
+                $.stage.create({
+map:{'#visitor_2' : { top: '65px', right: (w_width ) - 177 + 'px'},
+                        '#visitor_3' : { top: '45px', right: (w_width ) - 127 + 'px'},
+                        '#visitor_5' : { top: '45px', right: (w_width ) - 237 + 'px'},
+                        }, speed:1500, wait:4000, callback:function(d) {;} 
+                        }),
+                $.stage.create({map:null, speed:0, wait:9000, callback:function(d) {if(!d) d = 'slow';
+ $("#stats_users").fadeIn(d); }
+ }),
+                $.stage.create({
+                    wait:1000, callback:function(d) {if(!d) d = 'slow';
+$(".pointer").fadeOut(d);$(".visitor").fadeOut(d);$("#goal_users").fadeOut(d);$("#stats_users").fadeOut(d); }
+}            ),
+               $.stage.create( {
+map:{'#page_2' : { right: (w_width - 350), height: '450px', width: '325px', top:'50px' }
+                       }, speed:600, wait:5000, callback:function(d) {if(!d) d = 'slow';
+$("#generate").fadeIn(d);}
+}           ),
+               $.stage.create({wait:7500, callback:function(d) {if(!d) d = 'slow';
+ $("#generate_data").fadeIn(d); }
+ }),
+               $.stage.create({callback:function(d) {if(!d) d = 'slow';
+ $("#generate").fadeOut(d); }
+ }),
+               $.stage.create({
+                        map:{'#page_2' : { marginLeft: '-2000px', right: '2000px' },
+                       '#codesoup' : { marginLeft: '0px', right: (w_width - 350), height: '450px', width: '325px', top:'50px' }
+                       }
+                       , speed:800, wait:0, callback:function(d) {if(!d) d = 'slow';
+ $("#building").fadeIn(d); }
+ }),
+               $.stage.create({map:null, speed:0, wait:500, callback:function(d) {if(!d) d = 'slow';
+                   $("#form_domain").fadeIn(d); }}),
+               $.stage.create({map:null, speed:0, wait:500, callback:function(d) {if(!d) d = 'slow';
+                   $("#form_submit").fadeIn(d); }})
+
+
+            ];
+            window.setTimeout(function() {$.stage.start(stages, 2000, [0, 3, 7, 10, 16],null);}, 000);
+
+            for(var i = 1; i <= 6; i++ ) {
+                //total width: 462px
+                //640/2 ?
+                $("#visitor_" + i).css('right', (w_width / 4) + (i * 77)   + 'px');
+            }
+
+            });
+        </script>
+            <div id="overlay" style="display:none;width:100%;height:100%;background-color:white;z-index:1001;"></div>
+        <div id="container">
+            <div id="top_center" class="bigger" style="display: block; ">With press 9, we start by creating a variation of a single page.</div>
+            <div id="page_1" class="page" style="overflow-x: hidden; overflow-y: hidden; left: 292px; top: 40px; height: 450px; width: 325px; display: block; "><img src="./intro_files/genericpage.png"></div>
+            <div id="page_2" class="page" style="overflow-x: hidden; overflow-y: hidden; right: 292px; top: 40px; height: 450px; width: 325px; display: block; "><img src="./intro_files/genericpage.png"></div>
+            <div id="codesoup" class="page" style="margin-left:-700px;"><img src="./intro_files/codesoup.png"></div>
+            <div id="control_pointer" class="pointer bigger">Original page.</div>
+            <div id="treatment_pointer" class="pointer bigger">Variation page.</div>
+            <div id="slight" class="bigger">Our Test Designer enables you to edit HTML and CSS.</div>
+            <div id="generate" class="big">
+                <p>
+                We generate the javascript to swap the content and track visitors.</p>
+                No URL tagging. No redirecting.
+                <p></p>
+                <div id="generate_data">
+                    <p style="margin-bottom:3px;">
+                    Our API allows you to track custom data, like:
+                    </p>
+                    <ul style="margin-top:3px;">
+                        <li>visitor type: free user or premium?</li>
+                        <li>checkout total</li>
+                        <li>number of page views</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="building" class="big">
+                We're building A/B testing tools for developers and designers.
+                <div id="form_div">
+                <form action="http://press9formoreoptions.com/register" method="GET">
+                    <div style="display:none;" id="form_domain"><label for="domain">Enter your domain <em>(Base URL)</em></label><input type="text" id="domain" name="domain"></div>
+                        <div style="display:none;" id="form_submit"><input type="submit" value="Start here."></div>
+                </form>
+                </div>
+            </div>
+            <img style="" class="visitor" id="visitor_1" src="./intro_files/visitor.png">
+            <img style="" class="visitor" id="visitor_2" src="./intro_files/visitor.png">
+            <img style="" class="visitor" id="visitor_3" src="./intro_files/visitor.png">
+            <img style="" class="visitor" id="visitor_4" src="./intro_files/visitor.png">
+            <img style="" class="visitor" id="visitor_5" src="./intro_files/visitor.png">
+            <img style="" class="visitor" id="visitor_6" src="./intro_files/visitor.png">
+            <div id="random_users" class="bigger" style="">Visitors to the page are randomly shown either the original or the variation.</div>
+            <div id="goal_users" class="bigger" style="">We then track a visitor's progress to a <em>goal</em> event.<br><br><span style="display:block;" class="big">Examples: 
+                    <ul style="margin-top:4px;">
+                        <li>'Thanks for signing up' page</li>
+                        <li>'Your reciept' page</li>
+                        <li>Custom defined server-side or client-side event</li>
+                    </ul>
+                </span>
+            </div>
+            <div id="stats_users" class="big" style="">
+                <p style="margin-top:0px;">
+                press 9 statistically tests if the new variation content outperformed the original.</p>
+                <p>If so, change the original content to the variation content permanently.</p>
+                <p><em>Then run another test.</em></p>
+
+            </div>
+        </div>
+    
+
+
+</body></html>
